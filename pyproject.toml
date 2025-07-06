@@ -9,12 +9,12 @@ dependencies = ["ansible-core>=2.18.3"]
 
 [dependency-groups]
 dev = [
-  "ansible-lint>=24.12.2",
+  "ansible-lint>=25.6.1",
   "galaxy-update>=1.0.0",
-  "molecule-plugins[docker,vagrant]>=23.5.3",
-  "molecule>=24.12.0",
-  "pytest-ansible>=24.12.0",
-  "pytest>=8.3.4",
+  "molecule-plugins[docker,vagrant]>=23.7.0",
+  "molecule>=25.6.0",
+  "pytest-ansible>=25.6.2",
+  "pytest>=8.4.1",
 ]
 
 [tool.pytest.ini_options]

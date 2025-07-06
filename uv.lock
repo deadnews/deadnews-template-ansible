@@ -259,12 +259,12 @@ requires-dist = [{ name = "ansible-core", specifier = ">=2.18.3" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "ansible-lint", specifier = ">=24.12.2" },
+    { name = "ansible-lint", specifier = ">=25.6.1" },
     { name = "galaxy-update", specifier = ">=1.0.0" },
-    { name = "molecule", specifier = ">=24.12.0" },
-    { name = "molecule-plugins", extras = ["docker", "vagrant"], specifier = ">=23.5.3" },
-    { name = "pytest", specifier = ">=8.3.4" },
-    { name = "pytest-ansible", specifier = ">=24.12.0" },
+    { name = "molecule", specifier = ">=25.6.0" },
+    { name = "molecule-plugins", extras = ["docker", "vagrant"], specifier = ">=23.7.0" },
+    { name = "pytest", specifier = ">=8.4.1" },
+    { name = "pytest-ansible", specifier = ">=25.6.2" },
 ]
 
 [[package]]

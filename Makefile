@@ -1,4 +1,4 @@
-.PHONY: all clean default install update check pc lint test
+.PHONY: all clean default install update check pc lint test molecule
 
 default: check
 
