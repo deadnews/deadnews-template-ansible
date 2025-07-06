@@ -1,26 +1,23 @@
-[tool.poetry]
-name = "deadnews-template-ansible"
-version = "0.0.0"
-description = "Ansible Project Template"
-authors = ["DeadNews <deadnewsgit@gmail.com>"]
+[project]
+name            = "deadnews-template-ansible"
+description     = "Ansible Project Template"
+version         = "0.0.0"
+authors         = [{ name = "deadnews", email = "deadnewsgit@gmail.com" }]
+requires-python = ">=3.13"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-ansible-core = "^2.18.0"
+dependencies = ["ansible-core>=2.18.3"]
 
-[tool.poetry.group.dev.dependencies]
-galaxy-update = "^0.0.1"
-
-[tool.poetry.group.lint.dependencies]
-ansible-lint = { version = "^24.12.2", markers = "platform_system != 'Windows'" }
-
-[tool.poetry.group.test.dependencies]
-molecule = "^24.12.0"
-molecule-plugins = { version = "^23.5.3", extras = ["docker", "vagrant"] }
-pytest = "^8.3.4"
-pytest-ansible = "^24.12.0"
+[dependency-groups]
+dev = [
+  "ansible-lint>=24.12.2",
+  "galaxy-update>=0.0.1",
+  "molecule-plugins[docker,vagrant]>=23.5.3",
+  "molecule>=24.12.0",
+  "pytest-ansible>=24.12.0",
+  "pytest>=8.3.4",
+]
 
 [tool.pytest.ini_options]
-addopts = "--verbose"
+addopts   = "--verbose"
 testpaths = ["tests"]
-markers = ["docker", "molecule", "no_driver", "vagrant"]
+markers   = ["docker", "molecule", "no_driver", "vagrant"]

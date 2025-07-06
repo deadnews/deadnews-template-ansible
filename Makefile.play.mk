@@ -2,4 +2,4 @@
 .ONESHELL:
 
 ping:
-	poetry run ansible-playbook playbooks/ping.yml
+	uv run ansible-playbook playbooks/ping.yml

@@ -1,9 +1,16 @@
 ---
 exclude_paths:
+  - .ansible/
   - .cache/
+  - .deprecated/
+  - .facts_cache/
   - .github/
   - .pre-commit-config.yaml
+  - .pre-commit/
   - .prettierrc.yaml
+  - .venv/
+  - .vscode/
+  - docker-compose.yml
 
 skip_list:
   - name[play]

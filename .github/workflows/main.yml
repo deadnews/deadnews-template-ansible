@@ -5,8 +5,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  release:
-    types: [created]
 
 permissions:
   contents: read
@@ -30,29 +28,27 @@ jobs:
           key: reqs-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
           path: ${{ env.ANSIBLE_COLLECTIONS_PATH }}
 
-      - name: Install poetry
-        run: pipx install poetry
-
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6.3.1
         with:
-          cache: poetry
+          enable-cache: true
 
-      - name: Install deps
-        run: poetry install --no-root
+      - name: Install project
+        run: uv sync --frozen
 
       - name: Install requirements
         if: steps.cache-reqs.outputs.cache-hit != 'true'
-        run: poetry run ansible-galaxy install -r requirements.yml
+        run: uv run ansible-galaxy install -r requirements.yml
 
       - name: Lint code
-        run: poetry run ansible-lint
+        run: uv run ansible-lint
 
-  tests:
+  test:
     name: Tests
     strategy:
       fail-fast: false
       matrix:
-        molecule-distro: [debian12, ubuntu2204, ubuntu2404]
+        molecule-distro: [debian12, ubuntu2404]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -64,19 +60,17 @@ jobs:
           key: reqs-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
           path: ${{ env.ANSIBLE_COLLECTIONS_PATH }}
 
-      - name: Install poetry
-        run: pipx install poetry
-
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6.3.1
         with:
-          cache: poetry
+          enable-cache: true
 
-      - name: Install deps
-        run: poetry install --no-root
+      - name: Install project
+        run: uv sync --frozen
 
       - name: Install requirements
         if: steps.cache-reqs.outputs.cache-hit != 'true'
-        run: poetry run ansible-galaxy install -r requirements.yml
+        run: uv run ansible-galaxy install -r requirements.yml
 
       - name: Run tests
         run: make test-ci
