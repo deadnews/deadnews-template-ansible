@@ -10,7 +10,7 @@ exclude_paths:
   - .pre-commit/
   - .prettierrc.yaml
   - .pytest_cache/
-  - .ruff_cache
+  - .ruff_cache/
   - .venv/
   - .vscode/
   - docker-compose.yml

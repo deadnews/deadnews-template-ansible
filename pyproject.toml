@@ -10,7 +10,7 @@ dependencies = ["ansible-core>=2.18.3"]
 [dependency-groups]
 dev = [
   "ansible-lint>=24.12.2",
-  "galaxy-update>=0.0.1",
+  "galaxy-update>=1.0.0",
   "molecule-plugins[docker,vagrant]>=23.5.3",
   "molecule>=24.12.0",
   "pytest-ansible>=24.12.0",

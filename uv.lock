@@ -260,7 +260,7 @@ requires-dist = [{ name = "ansible-core", specifier = ">=2.18.3" }]
 [package.metadata.requires-dev]
 dev = [
     { name = "ansible-lint", specifier = ">=24.12.2" },
-    { name = "galaxy-update", specifier = ">=0.0.1" },
+    { name = "galaxy-update", specifier = ">=1.0.0" },
     { name = "molecule", specifier = ">=24.12.0" },
     { name = "molecule-plugins", extras = ["docker", "vagrant"], specifier = ">=23.5.3" },
     { name = "pytest", specifier = ">=8.3.4" },
@@ -322,16 +322,17 @@ wheels = [
 
 [[package]]
 name = "galaxy-update"
-version = "0.0.1"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "httpx" },
+    { name = "pyaml" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a8/c9/e9fb3bec2cee3bf3e2afac20a8c8864c0ecee90c9357badfc64f70ee42de/galaxy_update-0.0.1.tar.gz", hash = "sha256:50d376b9b284075af323b5fd49ad53c1960e390f24049f94ad7a1bfcfc1d4df5", size = 3682, upload-time = "2024-08-31T16:17:33.877Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/90/2f/2d87313670bda7fca30ce4cc51a253a217e4d2a045cfd5f206cd2d787f46/galaxy_update-1.0.0.tar.gz", hash = "sha256:bd08a3bc185f03b64e07224d33ab1553c3d152db66a010ec76eecbf783b4a4c9", size = 33335, upload-time = "2025-07-06T19:50:48.301Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/89/34/9c2f49cb294e27902d0ed583ef5b6bcf42edbe2dc0f76b45b84769915639/galaxy_update-0.0.1-py3-none-any.whl", hash = "sha256:5a10b3b5056f07cb0c30ce43e4bb34a58b06c01585a2303b62f58ecc13a189cb", size = 3843, upload-time = "2024-08-31T16:17:33.004Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/0e/45ceabfeb8f11e632de1dde61ae7bdadcb2c218318f0134bd6c3d5046c5c/galaxy_update-1.0.0-py3-none-any.whl", hash = "sha256:a1a751d3f2eda15811dc55bb72936621ee4a435055e50f5aa2158df971a9dfd4", size = 3796, upload-time = "2025-07-06T19:50:47.366Z" },
 ]
 
 [[package]]
@@ -358,18 +359,17 @@ wheels = [
 
 [[package]]
 name = "httpx"
-version = "0.27.2"
+version = "0.28.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
     { name = "certifi" },
     { name = "httpcore" },
     { name = "idna" },
-    { name = "sniffio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/78/82/08f8c936781f67d9e6b9eeb8a0c8b4e406136ea4c3d1f89a5db71d42e0e6/httpx-0.27.2.tar.gz", hash = "sha256:f7c2be1d2f3c3c3160d441802406b206c2b76f5947b11115e6df10c6c65e66c2", size = 144189, upload-time = "2024-08-27T12:54:01.334Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406, upload-time = "2024-12-06T15:37:23.222Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/95/9377bcb415797e44274b51d46e3249eba641711cf3348050f76ee7b15ffc/httpx-0.27.2-py3-none-any.whl", hash = "sha256:7bb2708e112d8fdd7829cd4243970f0c223274051cb35ee80c03301ee29a3df0", size = 76395, upload-time = "2024-08-27T12:53:59.653Z" },
+    { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517, upload-time = "2024-12-06T15:37:21.509Z" },
 ]
 
 [[package]]
@@ -578,6 +578,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+]
+
+[[package]]
+name = "pyaml"
+version = "25.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyyaml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c1/40/94f10f32ab952c5cca713d9ac9d8b2fdc37392d90eea403823eeac674c24/pyaml-25.5.0.tar.gz", hash = "sha256:5799560c7b1c9daf35a7a4535f53e2c30323f74cbd7cb4f2e715b16dd681a58a", size = 29812, upload-time = "2025-05-29T05:34:05.292Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/aa/7d/1b5061beff826f902285827261485a058b943332eba8a5532a0164735205/pyaml-25.5.0-py3-none-any.whl", hash = "sha256:b9e0c4e58a5e8003f8f18e802db49fd0563ada587209b13e429bdcbefa87d035", size = 26422, upload-time = "2025-05-29T05:34:03.594Z" },
 ]
 
 [[package]]
