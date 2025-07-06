@@ -5,9 +5,12 @@ exclude_paths:
   - .deprecated/
   - .facts_cache/
   - .github/
+  - .mypy_cache/
   - .pre-commit-config.yaml
   - .pre-commit/
   - .prettierrc.yaml
+  - .pytest_cache/
+  - .ruff_cache
   - .venv/
   - .vscode/
   - docker-compose.yml

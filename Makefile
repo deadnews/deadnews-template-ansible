@@ -23,7 +23,7 @@ test:
 	uv run pytest
 
 test-ci:
-	uv run pytest -rP --molecule roles -m docker -p no:warnings
+	uv run pytest -rP -p no:warnings -m docker --molecule roles
 
 # make molecule ROLE=<role>
 molecule:
