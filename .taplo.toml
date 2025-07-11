@@ -1,8 +1,11 @@
 [formatting]
 allowed_blank_lines = 1
+align_entries       = true
+column_width        = 80
 
 [[rule]]
 include = ["inventory.toml"]
 
 [rule.formatting]
-reorder_keys = true
+array_auto_expand = false
+reorder_keys      = true

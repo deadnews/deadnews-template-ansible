@@ -1,30 +1,34 @@
-.PHONY: all clean default install update checks pc lint test
+.PHONY: all clean default install update check pc lint test molecule
 
-default: checks
+default: check
+
 
 install:
 	pre-commit install
-	poetry install --sync --no-root
-	poetry run ansible-galaxy install -r requirements.yml
+	uv sync
+	uv run ansible-galaxy install -r requirements.yml
 
 update:
-	poetry up --latest
-	poetry run galaxy-update requirements.yml
+	uv sync --upgrade
+	uv run galaxy-update requirements.yml
 
-checks: pc
+check: pc
 pc:
 	pre-commit run -a
+
 lint:
-	poetry run ansible-lint
+	uv run ansible-lint
 
 test:
-	poetry run pytest
+	uv run pytest
 
 test-ci:
-	poetry run pytest -rP --molecule roles -m docker -p no:warnings
+	uv run pytest -rP -p no:warnings -m docker --molecule roles
 
-test-%:
-	pushd roles/$* && poetry run molecule test -s $*; popd
+# make molecule ROLE=<role>
+molecule:
+	pushd roles/$(ROLE) && uv run molecule test -s $(ROLE); popd
 
-test-vg-%:
-	pushd roles/$* && poetry run molecule test -s $*_vagrant; popd
+# make molecule-vg ROLE=<role>
+molecule-vg:
+	pushd roles/$(ROLE) && uv run molecule test -s $(ROLE)_vagrant; popd

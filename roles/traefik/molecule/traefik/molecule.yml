@@ -14,9 +14,12 @@ platforms:
 
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_VERBOSITY: 0
-    ANSIBLE_STDOUT_CALLBACK: community.general.yaml
+  config_options:
+    defaults:
+      callback_result_format: yaml
+      collections_path: "${MOLECULE_PROJECT_DIRECTORY}/../../.ansible"
+      roles_path: "${MOLECULE_PROJECT_DIRECTORY}/.."
+      verbosity: 0
   playbooks:
     converge: ../../../../molecule/playbooks/converge.yml
     prepare: ../../../../molecule/playbooks/prepare-systemd.yml
