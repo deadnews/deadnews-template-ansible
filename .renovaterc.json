@@ -4,7 +4,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^molecule/playbooks/prepare\\.yml$"],
+      "managerFilePatterns": ["/^molecule/playbooks/prepare\\.yml$/"],
       "matchStrings": [
         "version: (?<currentValue>.+?) # renovate: datasource=(?<datasource>[a-z-]+?) dep_name=(?<depName>[^\\s]+?)\\n"
       ]
