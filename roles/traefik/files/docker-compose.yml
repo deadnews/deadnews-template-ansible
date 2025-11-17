@@ -5,13 +5,18 @@ networks:
   dsproxy:
   traefik:
     external: true
+
 services:
   traefik:
-    image: traefik:v3.5.3@sha256:d6be8725d21b45bdd84b93ea01438256e0e3c94aa8fa51834fe87f37cd5d4af8
+    image: traefik:v3.6.1@sha256:fd5932c796f7e2db9fd6bff485ef693d53797f0ee8ad03dc68aa424ea6f21958
     container_name: traefik
     restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges]
     depends_on:
-      - dsproxy
+      dsproxy:
+        condition: service_healthy
     networks:
       - default
       - dsproxy
@@ -23,17 +28,29 @@ services:
       timeout: 10s
       start_period: 1m
     ports:
-      # "web" HTTP listener
-      - 0.0.0.0:80:80/tcp
-      # "websecure" HTTPS listener
-      - 0.0.0.0:443:443/tcp
+      - name: web
+        mode: ingress
+        host_ip: 0.0.0.0
+        published: 80
+        target: 80
+        protocol: tcp
+        app_protocol: http
+      - name: websecure
+        mode: ingress
+        host_ip: 0.0.0.0
+        published: 443
+        target: 443
+        protocol: tcp
+        app_protocol: https
     command:
       - --accesslog=true
       - --api.dashboard=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
+      - --entrypoints.websecure.http.tls.options=default
       - --entrypoints.websecure.http.tls=true
       - --global.checknewversion=false
+      - --global.sendAnonymousUsage=false
       - --log.level=WARN
       - --metrics.prometheus.addrouterslabels=true
       - --metrics.prometheus=true
@@ -52,13 +69,17 @@ services:
 
   # Security-enhanced proxy for the Docker Socket
   dsproxy:
-    image: tecnativa/docker-socket-proxy:v0.4.1@sha256:3400c429c5f9e1b21d62130fb93b16e2e772d4fb7695bd52fc2b743800b9fe9e
+    image: wollomatic/socket-proxy:1.10.0@sha256:3d825f671a5a190741ad6bff645be1061bceb53eaa6517b185de869e226cb779
     container_name: traefik-dsproxy
     restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges]
+    user: 0:0
     networks:
       - dsproxy
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://127.0.0.1:2375/version || exit 1
+      test: [CMD, /healthcheck]
       interval: 1m
       retries: 3
       timeout: 10s
@@ -66,16 +87,22 @@ services:
     volumes:
       - ${XDG_RUNTIME_DIR:-/var/run}/docker.sock:/var/run/docker.sock:ro
     environment:
-      DISABLE_IPV6: true
-      CONTAINERS: 1
-      NETWORKS: 1
-      SERVICES: 1
-      TASKS: 1
+      SP_ALLOW_GET: /v1\..{1,2}/(version|containers/.*|events.*)
+      SP_ALLOWFROM: traefik
+      SP_ALLOWHEALTHCHECK: true
+      SP_LISTENIP: 0.0.0.0
+      SP_LOGLEVEL: INFO
+      SP_STOPONWATCHDOG: true
+      SP_WATCHDOGINTERVAL: 3600
 
+  # Collects metrics from Traefik
   vector:
-    image: timberio/vector:0.50.0-alpine@sha256:93761c26fa3a3793f5f200de0f4cfc6102b5e9803ab33b4830d0873ba8dbdc4f
+    image: timberio/vector:0.51.1-alpine@sha256:2d16ae87ec395508366f3c064899d374fbe04de6e64c3a613ed64aedbee034b4
     container_name: traefik-vector
     restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges]
     depends_on:
       - traefik
     healthcheck:
@@ -91,6 +118,10 @@ services:
   whoami:
     image: traefik/whoami:v1.11.0@sha256:200689790a0a0ea48ca45992e0450bc26ccab5307375b41c84dfc4f2475937ab
     container_name: whoami
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges]
     networks:
       - traefik
     labels:

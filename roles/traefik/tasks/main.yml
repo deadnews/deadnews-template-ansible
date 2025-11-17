@@ -6,31 +6,23 @@
     name: deadnews.util.docker
   vars:
     docker_rootless: false
+    docker_config_daemon: files/daemon.json
 
-- name: Create a network for Traefik
-  community.docker.docker_network:
-    name: traefik
+- name: Setup Traefik
+  block:
+    - name: Create a network for Traefik
+      community.docker.docker_network:
+        name: traefik
 
-- name: Deploy Traefik
-  ansible.builtin.import_role:
-    name: deadnews.util.docker_compose
-  vars:
-    docker_compose_project: traefik
-    docker_compose_target_dir: ~/docker-compose
-    docker_compose_files:
-      - src: files/docker-compose.yml
-      - src: templates/vector.yml.j2
-    docker_compose_files_show: true
-    docker_compose_sleep_time: 2
-    docker_compose_containers_logs:
-      - traefik
-      - traefik-dsproxy
-      - traefik-vector
-    docker_compose_containers_check:
-      - traefik
-      - traefik-dsproxy
-      - traefik-vector
-      - whoami
+    - name: Deploy Traefik
+      ansible.builtin.import_role:
+        name: deadnews.util.docker_compose
+      vars:
+        docker_compose_project: traefik
+        docker_compose_target_dir: ~/docker-compose
+        docker_compose_files:
+          - src: files/docker-compose.yml
+          - src: templates/vector.yml.j2
 
 - name: Verify that Whoami is responding
   ansible.builtin.uri:

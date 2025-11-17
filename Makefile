@@ -4,17 +4,17 @@ default: check
 
 
 install:
-	pre-commit install
 	uv sync
 	uv run ansible-galaxy install -r requirements.yml
 
 update:
 	uv sync --upgrade
 	uv run galaxy-update requirements.yml
+	prek auto-update
 
 check: pc
 pc:
-	pre-commit run -a
+	prek run -a
 
 lint:
 	uv run ansible-lint

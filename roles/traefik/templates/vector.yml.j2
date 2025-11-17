@@ -16,8 +16,8 @@ transforms:
     inputs:
       - prometheus_scrape
     source: |-
-      .tags.host = "{{ ansible_fqdn }}"
-      .tags.instance = "{{ ansible_hostname }}"
+      .tags.host = "{{ ansible_facts.fqdn }}"
+      .tags.instance = "{{ ansible_facts.hostname }}"
 
 sinks:
   prometheus_exporter:
