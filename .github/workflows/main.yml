@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        molecule-distro: [ubuntu2404]
+        molecule-distro: [debian13]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

@@ -6,6 +6,7 @@
     name: deadnews.util.docker
   vars:
     docker_rootless: false
+    docker_config_daemon: files/daemon.json
 
 - name: Setup Traefik
   block:

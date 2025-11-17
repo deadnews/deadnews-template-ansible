@@ -7,4 +7,4 @@ collections:
   - name: community.docker
     version: 5.0.2
   - name: deadnews.util
-    version: 1.9.0
+    version: 1.10.0
