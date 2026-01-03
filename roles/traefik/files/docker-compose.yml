@@ -8,7 +8,7 @@ networks:
 
 services:
   traefik:
-    image: traefik:v3.6.4@sha256:beebe9d00a6f7cd8cf35581eb9c065d30d1ac0b961a5561fb106c64d10d8d76d
+    image: traefik:v3.6.6@sha256:82d3d16dde0474a51fef00b28de143d48b67f7a27453224d5e7b5aaefff26a97
     container_name: traefik
     restart: unless-stopped
     read_only: true
@@ -97,7 +97,7 @@ services:
 
   # Collects metrics from Traefik
   vector:
-    image: timberio/vector:0.51.1-alpine@sha256:2d16ae87ec395508366f3c064899d374fbe04de6e64c3a613ed64aedbee034b4
+    image: timberio/vector:0.52.0-alpine@sha256:4be91e938bc85ad1915c2d66f77342078904ca3391934d590c8f523e66613ad7
     container_name: traefik-vector
     restart: unless-stopped
     read_only: true
