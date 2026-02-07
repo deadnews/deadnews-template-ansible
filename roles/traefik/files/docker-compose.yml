@@ -8,7 +8,7 @@ networks:
 
 services:
   traefik:
-    image: traefik:v3.6.6@sha256:82d3d16dde0474a51fef00b28de143d48b67f7a27453224d5e7b5aaefff26a97
+    image: traefik:v3.6.7@sha256:a9890c898f379c1905ee5b28342f6b408dc863f08db2dab20e46c267d1ff463a
     container_name: traefik
     restart: unless-stopped
     read_only: true
@@ -69,7 +69,7 @@ services:
 
   # Security-enhanced proxy for the Docker Socket
   dsproxy:
-    image: wollomatic/socket-proxy:1.10.1@sha256:967150d21954992de5a141fc66eb8a392695644fdb2fbb31dfbbdfd3f563ee86
+    image: wollomatic/socket-proxy:1.11.0@sha256:54e2b18a10de702c9caca7e807243de5a825d11a927dc0fb1cc5e2341d3a1a3e
     container_name: traefik-dsproxy
     restart: unless-stopped
     read_only: true
@@ -97,7 +97,7 @@ services:
 
   # Collects metrics from Traefik
   vector:
-    image: timberio/vector:0.52.0-alpine@sha256:4be91e938bc85ad1915c2d66f77342078904ca3391934d590c8f523e66613ad7
+    image: timberio/vector:0.53.0-alpine@sha256:ca92d617e905953c3f852e7e88061f7039460e733522e3f0c21bc6ae946b2558
     container_name: traefik-vector
     restart: unless-stopped
     read_only: true
