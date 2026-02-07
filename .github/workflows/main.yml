@@ -19,17 +19,17 @@ jobs:
     name: Lint code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Cache ansible requirements
         id: cache-reqs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: reqs-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
           path: ${{ env.ANSIBLE_COLLECTIONS_PATH }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@b75a909f75acd358c2196fb9a5f1299a9a8868a4 # v6.7.0
+        uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
         with:
           enable-cache: true
 
@@ -51,17 +51,17 @@ jobs:
         molecule-distro: [debian13]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Cache ansible requirements
         id: cache-reqs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: reqs-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
           path: ${{ env.ANSIBLE_COLLECTIONS_PATH }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@b75a909f75acd358c2196fb9a5f1299a9a8868a4 # v6.7.0
+        uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
         with:
           enable-cache: true
 
