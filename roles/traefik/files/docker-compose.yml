@@ -8,7 +8,7 @@ networks:
 
 services:
   traefik:
-    image: traefik:v3.6.7@sha256:a9890c898f379c1905ee5b28342f6b408dc863f08db2dab20e46c267d1ff463a
+    image: traefik:v3.6.10@sha256:c549d482c55d7a797398562064f35428cc53e748d84d7190997930e7b31bcc32
     container_name: traefik
     restart: unless-stopped
     read_only: true
@@ -69,7 +69,7 @@ services:
 
   # Security-enhanced proxy for the Docker Socket
   dsproxy:
-    image: wollomatic/socket-proxy:1.11.0@sha256:54e2b18a10de702c9caca7e807243de5a825d11a927dc0fb1cc5e2341d3a1a3e
+    image: wollomatic/socket-proxy:1.11.3@sha256:9ecd9363c5b290b27c9d77f3fae812073713f528a401fe01fe2919520b9081d0
     container_name: traefik-dsproxy
     restart: unless-stopped
     read_only: true
